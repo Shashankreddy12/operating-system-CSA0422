@@ -1,0 +1,50 @@
+#include <stdio.h>
+#define MAX_PROCESSES 3
+struct process {
+    int pid;
+    int arrival_time;
+    int burst_time;
+    int waiting_time;
+    int turnaround_time;
+};
+int main() {
+    int i;
+    float avg_waiting_time = 0, avg_turnaround_time = 0;
+    struct process processes[MAX_PROCESSES];
+    for (i = 0; i < MAX_PROCESSES; i++) {
+        processes[i].pid = i;
+        processes[i].arrival_time = 0;
+        if (i == 0) {
+            processes[i].burst_time = 2;
+        } else if (i == 1) {
+            processes[i].burst_time = 4;
+        } else {
+            processes[i].burst_time = 8;
+        }
+        processes[i].waiting_time = 0;
+        processes[i].turnaround_time = 0;
+    }
+    for (i = 0; i < MAX_PROCESSES; i++) {
+        if (i == 0) {
+processes[i].waiting_time = 0;
+        } else {
+            processes[i].waiting_time = processes[i - 1].waiting_time + processes[i - 1].burst_time;
+        }
+        processes[i].turnaround_time = processes[i].waiting_time + processes[i].burst_time;
+        avg_waiting_time += processes[i].waiting_time;
+        avg_turnaround_time += processes[i].turnaround_time;
+    }
+    avg_waiting_time /= MAX_PROCESSES;
+    avg_turnaround_time /= MAX_PROCESSES;
+
+ 
+    printf("Process\tArrival Time\tBurst Time\tWaiting Time\tTurnaround Time\n");
+    for (i = 0; i < MAX_PROCESSES; i++) {
+        printf("%d\t%d\t\t%d\t\t%d\t\t%d\n", processes[i].pid, processes[i].arrival_time, processes[i].burst_time,
+            processes[i].waiting_time, processes[i].turnaround_time);
+    }
+    printf("Average waiting time: %.2f\n", avg_waiting_time);
+    printf("Average turnaround time: %.2f\n", avg_turnaround_time);
+
+    return 0;
+}
