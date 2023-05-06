@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n = 9; // number of tracks
+    int head = 50; // initial position of the head
+    int tracks[] = {55, 58, 60, 70, 18, 90, 150, 160, 184}; // track positions
+    int total_movement = 0; // variable to store total head movement
+
+    printf("Head movement sequence: %d", head);
+
+    // iterate over the tracks in the order they are received
+    for(int i = 0; i < n; i++)
+    {
+        total_movement += abs(head - tracks[i]); // calculate the absolute head movement
+        head = tracks[i]; // move the head to the next track
+        printf(" -> %d", head); // print the track the head moved to
+    }
+
+    printf("\nAverage head movement: %.2f\n", (float) total_movement / n); // print the average head movement
+
+    return 0;
+}
