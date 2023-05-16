@@ -1,3 +1,11 @@
+Write a program to simulate the Dining Philosopher problem and verify your output with the following test case:
+No of Philosophers: 5
+THINKING – When philosopher doesn’t want to gain access to either fork.
+HUNGRY – When philosopher wants to enter the critical section.
+EATING – When philosopher has got both the forks, i.e., he has entered the section.
+Philosopher i can set the variable state[i] = EATING only if her two neighbors are not eating
+      (state[(i+4) % 5] != EATING) and (state[(i+1) % 5] != EATING).
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
